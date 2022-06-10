@@ -1,6 +1,6 @@
 // Copyright 2021
 int countPairs1(int* arr, int len, int value) {
-    int c = 0;
+  int c = 0;
     for (int i = 0; i < len; i++) {
       for (int j = 0; j < len; j++) {
         if (arr[i] + arr[j] == value && i !=j)
