@@ -20,7 +20,7 @@ int countPairs2(int* arr, int len, int value) {
         c++;
       }
     }
-   return c;
+    return c;
 }
 
 int countPairs3(int* arr, int len, int value) {
@@ -46,7 +46,7 @@ int countPairs3(int* arr, int len, int value) {
         }
         if (arr[i] + arr[mid] < value) l = mid;
         if (arr[i] + arr[mid] > value) h = mid;
-      } 
+        } 
     }
     return c;
 }
