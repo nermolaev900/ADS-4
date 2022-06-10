@@ -1,60 +1,52 @@
-// Copyright 2021 NNTU-CS
-int countPairs1(int *arr, int len, int value) {
-  int p = 0;
+// Copyright 2021 DegtyarevPaul
+int countPairs1(int* arr, int len, int value) {
+    int c = 0;
     for (int i = 0; i < len; i++) {
-      for (int j = i + 1; j < len; j++) {
-        if (arr[i] + arr[j] == value)
-          p += 1;}
+      for (int j = 0; j < len; j++) {
+        if (arr[i] + arr[j] == value && i !=j)
+        c++;
+      }
     }
-  return p;
+    return c / 2;
  }
 
-int countPairs2(int *arr, int len, int value) {
-  int p = 0;
-  int t;
-  for (int i = len - 1; i >= 0; i--) {
-    if (arr[i] > value) {
-      continue;
-      } 
-      else {
-        t = i;
-        break;
+int countPairs2(int* arr, int len, int value) {
+    int i = 0;
+      int j = len - 1;
+      int c = 0;
+    for (i = 0; i < len; i++) {
+      for (j = len - 1; j > i; j--) {
+        if (arr[i] + arr[j] == value)
+        c++;
       }
-   }
-   for (int i = 0; i < t - 1; i++) {
-     for (int j = t; j >= i + 1; j--) {
-       if (arr[i] + arr[j] == value)
-         p++;
-     }
-  }
-  return p;
+    }
+   return c;
 }
 
-int countPairs3(int *arr, int len, int value) {
-  int p = 0, t = 0, f = len - 1;
-  while (t < f - 1) {
-    int d_1 = (t + f) / 2;
-    if (arr[d_1] <= value)
-      t = d_1;
-    else
-      f = d_1;
-  }
-   len = f - 1;
-   for (int i = 0; i < len; i++) {
-     t = i + 1, f = len - 1;
-     int q = 0;
-     while (t < f) {
-       int d_2 = (t + f) / 2;
-       if (arr[d_2] < (value - arr[i]))
-         t = d_2 + 1;
-       else
-         f = d_2;
-     }
-     while (arr[t] == (value - arr[i])) {
-       q++;
-       t++;
-     }
-     p += q;
-   }
-   return p;
+int countPairs3(int* arr, int len, int value) {
+    int c = 0;
+    for (int i = 0; i < len - 1; i++) {
+      int l = i;
+      int h = len;
+      while (l < h - 1) {
+        int mid = (l + h) / 2;
+        if (arr[i] + arr[mid] == value) {
+          c++;
+          int j = mid + 1;
+          while (arr[i] + arr[j] == value && j < h) {
+            c++;
+            j++;
+          }
+          j = mid - 1;
+          while (arr[i] + arr[j] == value && j > l) {
+            c++;
+            j--;
+          }
+          break;
+        }
+        if (arr[i] + arr[mid] < value) l = mid;
+        if (arr[i] + arr[mid] > value) h = mid;
+      } 
+    }
+    return c;
 }
